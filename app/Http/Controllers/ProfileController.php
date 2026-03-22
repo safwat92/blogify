@@ -9,17 +9,44 @@ use Illuminate\Support\Facades\Auth;
 class ProfileController extends Controller
 {
     public function index() {
-        $userArticles = Auth::user()->load('articles.article_likes', 'articles.comments');
-        $articles = $userArticles->articles;
-        $views = $userArticles->articles->sum('views_count');
-        $likes = $userArticles->article_likes->count();
-        $comments = $userArticles->comments->count();
+        $articles = Auth::user()
+        ->articles()
+        ->withCount("comments") // count per article
+        ->withCount("article_likes")
+        ->paginate(20);
+
+        $views = $articles->sum("views_count");
+        $comments = $articles->sum('comments_count');
+        $likes = $articles->sum('article_likes_count');
+
         return view("blog.profile", compact('articles','views','likes','comments'));
     }
-    public function updateProfileInfo(UpdateProfileRequest $request) {
+    public function update(UpdateProfileRequest $request) {
         $cred = $request->validated();
         $user = Auth::user();
         $user->update($cred);
         return redirect()->back();
+    }
+
+    public function showBookmarks() {
+        $user = Auth::user();
+
+        $articles = $user->articles()
+            ->select(['id','title','views_count'])
+            ->withCount(['comments','article_likes'])
+            ->get();
+
+        $views = $articles->sum('views_count');
+        $comments = $articles->sum('comments_count');
+        $likes = $articles->sum('article_likes_count');
+
+        $bookmarks = $user->bookmarks()
+            ->select(['articles.id','articles.title','articles.description','articles.user_id','articles.views_count'])
+            ->with(['user:id,full_name,profile_image'])
+            ->withCount(['comments','article_likes'])
+            ->orderByDesc('bookmarks.created_at')
+            ->paginate(20);
+
+        return view("blog.bookmarks", compact('bookmarks','views','comments','likes'));
     }
 }

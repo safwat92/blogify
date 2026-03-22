@@ -22,9 +22,9 @@ class Article extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function bookmarks()
+    public function bookmarkedBy()
     {
-        return $this->hasMany(Bookmark::class);
+        return $this->belongsToMany(User::class, "bookmarks");
     }
 
     public function comments()
@@ -39,6 +39,6 @@ class Article extends Model
 
     public function tags()
     {
-        return $this->hasMany(Tag::class);
+        return $this->belongsToMany(Tag::class);
     }
 }

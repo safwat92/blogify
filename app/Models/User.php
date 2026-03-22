@@ -60,7 +60,7 @@ class User extends Authenticatable
 
     public function bookmarks()
     {
-        return $this->hasMany(Bookmark::class);
+        return $this->belongsToMany(Article::class, "bookmarks");
     }
 
     public function comments()

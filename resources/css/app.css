@@ -3,3 +3,7 @@
 @tailwind utilities;
 
 @custom-variant light (&:where(.dark, .dark *));
+
+html {
+  scroll-behavior: smooth;
+}

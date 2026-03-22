@@ -18,18 +18,18 @@ class TagSeeder extends Seeder
     /**
      * Run the database seeds.
      */
-    public function run(): void
+    public function run()
     {
-        Article::all()->each(function (Article $article) {
-            $count = rand(2, 5);
-            $selected = Arr::random($this->tags, min($count, count($this->tags)));
+        Tag::factory()->count(10)->create();
 
-            foreach ((array) $selected as $tag) {
-                Tag::firstOrCreate(
-                    ['article_id' => $article->id, 'tag' => $tag],
-                    ['article_id' => $article->id, 'tag' => $tag]
-                );
-            }
+        $tags = Tag::all();
+
+        Article::all()->each(function ($article) use ($tags) {
+
+            $randomTags = $tags->random(rand(1, 3))->pluck('id');
+
+            $article->tags()->attach($randomTags);
+
         });
     }
 }

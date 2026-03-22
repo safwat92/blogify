@@ -13,7 +13,7 @@
            cursor-pointer
            border border-gray-300
            rounded-md shadow-sm
-           focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 mb-4"  type="file" name="profile" :value="old('profile')" required autofocus
+           focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 mb-4"  type="file" name="profile" :value="old('profile')" autofocus
         autocomplete="profile" accept="image/png, image/jpeg, image/jpg, image/webp"/>
             <x-input-error :messages="$errors->get('profile')" class="mt-2" />
         </div>

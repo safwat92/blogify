@@ -18,7 +18,7 @@
                     <div class="pl-5">
                         <div>
                             <h4 class="text-lg font-bold">{{ auth()->user()->full_name }}</h4>
-                            <span class="text-gray-700 text-sm">{{ auth()->user()->email }}</span>
+                            <span class="text-gray-700 text-sm font-bold pb-2">{{ auth()->user()->email }}</span>
                             <p class="text-gray-700 text-sm max-w-80 mb-4">{{ auth()->user()->description }}</p>
                         </div>
                         <div class="text-gray-500 flex gap-4 justify-center">
@@ -37,8 +37,9 @@
             </div>
         <div class="border-2 rounded p-3">
             <h3 class="text-2xl mb-3 font-bold">{{ __("Edit Profile") }}</h3>
-            <form action="{{ route("update-profile") }}" method="post">
+            <form action="{{ route("profile.update", auth()->user()->id) }}" method="post">
                 @csrf
+                @method("PUT")
                 <div class="flex gap-3">
                     <div>
                         <label for="full_name">{{ __("Name") }}</label>
@@ -76,8 +77,8 @@
 
         <div class="mt-4">
             <div class="text-2xl font-bold flex mb-4 border">
-                <a class="p-4" href="{{ route("profile") }}">{{ __("Your Articles") }}</a>
-                <a class="p-4 border-b border-blue-400 bg-blue-50 block" href="{{ route("bookmarks.index") }}">{{ __("Bookmarks") }}</a>
+                <a class="p-4" href="{{ route("profile.index") }}">{{ __("Your Articles") }}</a>
+                <a class="p-4 border-b border-blue-400 bg-blue-50 block" href="{{ route("show-bookmarks") }}">{{ __("Bookmarks") }}</a>
             </div>
             <div class="flex flex-col gap-3">
                 @foreach ($bookmarks as $bookmark)
@@ -85,15 +86,18 @@
                 :id="$bookmark->id"
                 :title="$bookmark->title"
                 :description="$bookmark->description"
-                :author="auth()->user()->full_name"
+                :author="$bookmark->user->full_name"
                 :date="''"
-                :image="'user.png'"
+                :image="$bookmark->user->profile_image"
                 :profile="'cover.png'"
                 :views="$bookmark->views_count"
                 :comments="$bookmark->comments_count"
                 :likes="$bookmark->article_likes_count"
                 />
             @endforeach
+            </div>
+            <div class="mt-4">
+                {{ $bookmarks->links() }}
             </div>
         </div>
 

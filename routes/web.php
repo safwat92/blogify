@@ -1,20 +1,23 @@
 <?php
 
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\BookmarkController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ArticleController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\BookmarkController;
 
 
 Route::middleware(['auth','verified'])->group(function () {
+    // pages
     Route::get("/", [HomeController::class, 'index'])->name("blog");
-    Route::get("/profile", [ProfileController::class, 'index'])->name("profile");
-    Route::post("/profile", [ProfileController::class, 'updateProfileInfo'])->name("update-profile");
-    Route::resource("/article", ArticleController::class);
-    Route::resource("/bookmarks", BookmarkController::class);
-    Route::resource('/comment', CommentController::class)->only('store','update','destory');
+    Route::resource("profile", ProfileController::class)->only("index","update");
+    Route::get("/profile/bookmarks", [ProfileController::class, 'showBookmarks'])->name("show-bookmarks");
+    Route::get("/article/{article_id}", [ArticleController::class, "showArticle"])->name("show-article");
+    Route::post("/article/{article_id}/like", [ArticleController::class, 'likeArticle']);
+    Route::post("/article/{article_id}/bookmark", [ArticleController::class, 'bookmarkArticle']);
+    Route::resource('/article/{article_id}/comment', CommentController::class)->only('store','update','destroy');
+    Route::post("/comment/{comment}/like", [CommentController::class, 'likeComment'])->name('comment.like');
 });
 
 require __DIR__.'/auth.php';

@@ -27,7 +27,6 @@ class TagFactory extends Factory
         ];
 
         return [
-            'article_id' => Article::factory(),
             'tag' => fake()->randomElement($tags),
         ];
     }

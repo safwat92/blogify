@@ -5,7 +5,7 @@
             <h3 class="font-bold text-2xl pl-3">{{ @config("app.name") }}</h3>
         </a>
         <div class="flex items-center gap-2">
-            <a href="{{ route("profile") }}" class="block hover:bg-white rounded-full px-4 py-1 hover:text-black transition-colors">{{ __("Profile") }}</a>
+            <a href="{{ route("profile.index") }}" class="block hover:bg-white rounded-full px-4 py-1 hover:text-black transition-colors">{{ __("Profile") }}</a>
             <form action="{{ route("logout") }}" method="post">
                 @csrf
                 <button class="block hover:bg-red-500 rounded-full px-4 py-1 transition-colors">logout</button>
