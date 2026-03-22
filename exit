@@ -1,0 +1,19 @@
+[90m= [39m[
+    "[32mlaravel.article_likes[39m",
+    "[32mlaravel.articles[39m",
+    "[32mlaravel.bookmarks[39m",
+    "[32mlaravel.cache[39m",
+    "[32mlaravel.cache_locks[39m",
+    "[32mlaravel.comment_likes[39m",
+    "[32mlaravel.comments[39m",
+    "[32mlaravel.failed_jobs[39m",
+    "[32mlaravel.job_batches[39m",
+    "[32mlaravel.jobs[39m",
+    "[32mlaravel.migrations[39m",
+    "[32mlaravel.password_reset_tokens[39m",
+    "[32mlaravel.personal_access_tokens[39m",
+    "[32mlaravel.sessions[39m",
+    "[32mlaravel.tags[39m",
+    "[32mlaravel.users[39m",
+  ]
+

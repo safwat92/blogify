@@ -96,6 +96,11 @@
                 />
             @endforeach
             </div>
+            @if(count($bookmarks) == 0)
+                <div class="my-12">
+                    <img src="{{ asset("./images/empty_data.svg") }}" class="mx-auto" alt="not found">
+                </div>
+            @endif
             <div class="mt-4">
                 {{ $bookmarks->links() }}
             </div>

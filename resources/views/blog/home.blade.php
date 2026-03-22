@@ -13,7 +13,7 @@
         <div class="md:flex justify-between items-center my-7">
             <h2 class="text-3xl font-bold mb-3 md:m-0"> {{ __("Explore latest Articles on Blogify!🚀") }} </h2>
             <form method="GET" action="{{ route('blog') }}" class="flex gap-2">
-                <input type="search" placeholder="{{ __("Realtime Article Search..") }}"
+                <input type="search" placeholder="{{ __("Search articles...") }}"
                     class="px-3 py-2 rounded border md:min-w-80 block w-full" name="search" value="{{request('search')}}">
                 <button type="submit" class="px-4 py-2 bg-blue-800 text-white rounded block w-fit"><i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
@@ -61,6 +61,12 @@
                 :likes="$article->article_likes_count"
                 />
             @endforeach
+            @if(count($articles) == 0)
+               <div class="my-12">
+                   <img src="{{ asset("./images/empty_data.svg") }}" class="mx-auto" alt="not found">
+                   <p class="text-center mt-5">No data matches your search found!</p>
+               </div>
+                @endif
         </div>
         <div class="mt-4">
             {{ $articles->links() }}

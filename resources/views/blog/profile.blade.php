@@ -91,6 +91,11 @@
                         :likes="$article->article_likes_count"
                         />
                 @endforeach
+                    @if(count($articles) == 0)
+                        <div class="my-12">
+                            <img src="{{ asset("./images/empty_data.svg") }}" class="mx-auto" alt="not found">
+                        </div>
+                    @endif
             </div>
             <div class="mt-4">
                 {{ $articles->links() }}

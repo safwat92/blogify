@@ -9,7 +9,9 @@ use App\Http\Controllers\BookmarkController;
 
 
 Route::middleware(['auth','verified'])->group(function () {
-    // pages
+    //admin
+
+    // blog
     Route::get("/", [HomeController::class, 'index'])->name("blog");
     Route::resource("profile", ProfileController::class)->only("index","update");
     Route::get("/profile/bookmarks", [ProfileController::class, 'showBookmarks'])->name("show-bookmarks");
