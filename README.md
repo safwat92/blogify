@@ -1,4 +1,4 @@
-```markdown
+
 # 📝 Blogify
 
 **Blogify** is a modern web-based blogging platform designed for reading, publishing, and interacting with articles. It offers a seamless experience for creators and readers to engage through likes, comments, bookmarks, and author subscriptions.
@@ -20,13 +20,13 @@
 
 Here are previews of the project's interface:
 
-```markdown
+
 ![Homepage Preview](screenshots/1.png)
 ![Article Page](screenshots/2.png)
 ![Dashboard](screenshots/3.png)
 ![User Profile](screenshots/4.png)
 
-```
+
 
 ---
 
