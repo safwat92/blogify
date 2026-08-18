@@ -46,11 +46,11 @@ class HomeController extends Controller
         $articles = $query->with('user')
             ->withCount('comments')
             ->withCount("article_likes")
-            ->paginate(20);
+            ->paginate(20)->withQueryString();
 
         $selectedTag = Tag::where("tag", $request->get('tag'))->get();
 
-        $randomTags = Tag::inRandomOrder()->limit($selectedTag->isEmpty() ? 5 : 4)->get();
+        $randomTags = Tag::limit(5)->get();
 
         $tags =  $selectedTag->merge($randomTags);
 

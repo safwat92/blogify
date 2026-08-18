@@ -14,16 +14,16 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="">
-       
-            <!-- Page Content -->
-            <main>
-                <h1>dashboard</h1>
-                <form action="{{ route("logout") }}" method="post">
-                    @csrf
-                    <button type="submit">logout</button>
-                </form>
-            </main>
-        </div>
+    <body class="font-sans antialiased bg-gray-100 text-gray-900 min-h-screen flex flex-col justify-between">
+        <!-- Page Content -->
+        <main class="max-w-4xl w-full mx-auto p-4 sm:p-8 flex-1 flex flex-col justify-center items-center">
+            <h1 class="text-3xl font-bold mb-6 text-gray-800">{{ __('Dashboard') }}</h1>
+            <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button type="submit" class="px-5 py-2.5 bg-red-600 hover:bg-red-700 text-white font-medium rounded-lg transition-colors shadow-sm">
+                    {{ __('Logout') }}
+                </button>
+            </form>
+        </main>
     </body>
 </html>

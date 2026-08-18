@@ -4,11 +4,36 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Article;
+use App\Traits\ExtractArticleDetails;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class ArticleController extends Controller
 {
+    use ExtractArticleDetails;
+    public function createArticleView() {
+        return view("blog.writeArticle");
+    }
+
+    public function createArticle(Request $request) {
+        $title = $this->getTitle($request->input("content"));
+        $description = $this->getDescription($request->input("content"));
+
+        if (!$title || !$description) {
+            return back()->withErrors([
+                "error" => "title & description Not Found"
+            ]);
+        }
+
+        $user = Auth::user();
+        $user->articles()->create([
+            "title" => $title,
+            "description" => $description,
+            "body" => $request->get("content"),
+        ]);
+
+        return redirect("/");
+    }
 
     public function showArticle(string $id)
     {

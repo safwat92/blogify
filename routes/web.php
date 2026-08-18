@@ -15,6 +15,8 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::get("/", [HomeController::class, 'index'])->name("blog");
     Route::resource("profile", ProfileController::class)->only("index","update");
     Route::get("/profile/bookmarks", [ProfileController::class, 'showBookmarks'])->name("show-bookmarks");
+    Route::get("/article/create", [ArticleController::class, "createArticleView"])->name("create-article");
+    Route::post("/article/create", [ArticleController::class, "createArticle"])->name("create-article");
     Route::get("/article/{article_id}", [ArticleController::class, "showArticle"])->name("show-article");
     Route::post("/article/{article_id}/like", [ArticleController::class, 'likeArticle']);
     Route::post("/article/{article_id}/bookmark", [ArticleController::class, 'bookmarkArticle']);

@@ -24,7 +24,8 @@ class UpdateProfileRequest extends FormRequest
         return [
             'full_name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users,email,' . $this->user()->id,
-            'description' => 'nullable|string|max:255'
+            'description' => 'nullable|string|max:255',
+            'profile_image' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp|max:2048',
         ];
     }
 }
